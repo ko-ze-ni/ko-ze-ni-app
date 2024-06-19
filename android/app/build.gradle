@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace = "com.example.ko_ze_ni_app"
+    namespace = "com.kozeni.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -34,14 +34,27 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.ko_ze_ni_app"
+        applicationId = "com.kozeni.app"
+        multiDexEnabled true
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
+    }
+
+    flavorDimensions "kozeni-build-type"
+    productFlavors {
+        qa {
+            dimension "kozeni-build-type"
+            resValue("string", "app_name", "(QA) KoZeni")
+            applicationIdSuffix ".qa"
+        }
+        production {
+            dimension "kozeni-build-type"
+            resValue("string", "app_name", "KoZeni")
+        }
     }
 
     buildTypes {
